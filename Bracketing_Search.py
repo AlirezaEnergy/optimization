@@ -11,10 +11,11 @@ def Bracketing(f, x_init, x_min, x_max,step = 1e-2, step_growth = 1.1, plotting_
     b, fb = a + step, f(a + step)
     
     X = np.arange(x_min,x_max+plotting_step,plotting_step)
-    plt.figure(figsize = (6,4), dpi = 100)
+    plt.figure(figsize = (8,6), dpi = 100)
     plt.plot(X,list(map(f,X)))
-    plt.xlabel('X')
-    plt.ylabel('f(x)')
+    plt.title('Minimization with Bracketing method',fontname = 'Times New Roman', size = 20)
+    plt.xlabel('X', size = 20, fontname = 'Times New Roman')
+    plt.ylabel('f(x)', size = 20, fontname = 'Times New Roman')
     
     while True:
         
