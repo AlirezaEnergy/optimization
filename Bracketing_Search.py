@@ -12,7 +12,7 @@ def Bracketing(f, x_init, x_min, x_max,step = 1e-2, step_growth = 1.1, plotting_
     
     X = np.arange(x_min,x_max+plotting_step,plotting_step)
     plt.figure(figsize = (6,4), dpi = 100)
-    plt.plot(X,f(X))
+    plt.plot(X,list(map(f,X)))
     plt.xlabel('X')
     plt.ylabel('f(x)')
     
@@ -45,9 +45,10 @@ def Bracketing(f, x_init, x_min, x_max,step = 1e-2, step_growth = 1.1, plotting_
 
 f1 = lambda x: abs(x)
 f2 = lambda x: x**2
+f3 = lambda x: max(-x**3,x**2-150)
 
 x_init = -2
-min_, max_ = Bracketing(f1,x_init,x_min = -2, x_max = 2)
+min_, max_ = Bracketing(f3,x_init,x_min = -5, x_max = 10)
 print(f'{(round(min_,3),round(max_,3))}')
 
 
