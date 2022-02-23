@@ -1,8 +1,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def Bracketing(f, x_init, x_min, x_max,step = 1e-2, step_growth = 1.1, plotting_step = 0.01):
-    # the aim is to find a<b<c such that f(a) > f(b) and f(b) < f(c)
+def Bracketing(f, x_init, x_min, x_max,step = 1e-2, step_growth = 1.1, plotting_step = 0.01, 
+               plot_function=True):
+    """
+    the aim is to find a<b<c such that f(a) > f(b) and f(b) < f(c)
+    
+    f:           univariate and unimodal function to be minimized.
+    x_init       initial point of search.   
+    x_min:       The beginning of the search interval.   
+    x_max:       End of search interval.
+    step:        The amount of movement in the optimal direction.
+    step_growth: step size growth if the direction was optimum
+
+    returns an interval in which the minimizer lies
+    """
+    
     a, fa = x_init, f(x_init)
     
     if a + step < x_min or a + step > x_max:
@@ -10,13 +23,16 @@ def Bracketing(f, x_init, x_min, x_max,step = 1e-2, step_growth = 1.1, plotting_
     
     b, fb = a + step, f(a + step)
     
-    X = np.arange(x_min,x_max+plotting_step,plotting_step)
-    plt.figure(figsize = (8,6), dpi = 100)
-    plt.plot(X,list(map(f,X)))
-    plt.title('Minimization with Bracketing method',fontname = 'Times New Roman', size = 20)
-    plt.xlabel('X', size = 20, fontname = 'Times New Roman')
-    plt.ylabel('f(x)', size = 20, fontname = 'Times New Roman')
+    if plot_function:
+        X = np.arange(x_min,x_max+plotting_step,plotting_step)
+        plt.figure(figsize = (8,6), dpi = 100)
+        plt.plot(X,list(map(f,X)))
+        plt.title('Minimization with Bracketing method',fontname = 'Times New Roman', size = 20)
+        plt.xlabel('X', size = 20, fontname = 'Times New Roman')
+        plt.ylabel('f(x)', size = 20, fontname = 'Times New Roman')
     
+    Sols = []
+    Sols.append(x_init)
     while True:
         
         if fb > fa: # this means our direction was wrong as we have growth
@@ -32,9 +48,10 @@ def Bracketing(f, x_init, x_min, x_max,step = 1e-2, step_growth = 1.1, plotting_
             else:
                 return (a,b)
         
-        plt.scatter([a,b,c],[f(a),f(b),f(c)],c='r')
+        if plot_function:
+            plt.scatter([a,b,c],[f(a),f(b),f(c)],c='r')
         
-        if fb < fc: # we reached to an interval => end and return the interval
+        if fb < fc: # reached to an interval => end and return the interval
             if a < c:
                 return (a,c)
             else:
@@ -43,6 +60,8 @@ def Bracketing(f, x_init, x_min, x_max,step = 1e-2, step_growth = 1.1, plotting_
         a, b = b, c
         fa, fb = fb, fc
         step = step * step_growth
+
+
 
 f1 = lambda x: abs(x)
 f2 = lambda x: x**2
