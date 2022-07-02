@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+ 
 def Fibonacci_Search(f,a,b,num_iter,eps,plotting_step = 0.1, plot_function=True, plot_best_sols=True):
     """
     f:          univariate function to be minimized.
