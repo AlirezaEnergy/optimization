@@ -8,6 +8,8 @@ def Fibonacci_Search(f,a,b,num_iter,eps,plotting_step = 0.1, plot_function=True,
     b:          End of search interval.
     num_iter:   Number of search iteration
     esp:        sufficient small number
+
+    returns an interval in which the minimizer lies
     """
     if plot_function:
         X = np.arange(a,b+plotting_step,plotting_step)
