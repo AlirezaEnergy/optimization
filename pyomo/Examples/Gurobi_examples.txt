@@ -1,3 +1,4 @@
 A list of optimization problems which thier implementation in pyomo could be nice in terms of educational purposes are available in:
 
 https://www.gurobi.com/resource/modeling-examples-using-the-gurobi-python-api-in-jupyter-notebook/
+https://python-mip.readthedocs.io/en/latest/examples.html
